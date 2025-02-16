@@ -8,7 +8,7 @@ import AuthForm from "./AuthForm"
 import { ShoppingCart } from "lucide-react"
 
 export default function Header() {
-    conts [cartItemCount, setCartItemCount] = useState(0)
+    const [cartItemCount, setCartItemCount] = useState(0)
 
     useEffect(() => {
         const updateCartCount = () => {
