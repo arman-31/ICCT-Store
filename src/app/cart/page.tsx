@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import Header from "../components/Header"
-import { Button } from "@/components/ui/Button"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import Button from "app/components/ui/button"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "app/components/ui/Table"; 
 import { Trash2 } from "lucide-react"
 
 interface CartItem {
@@ -64,7 +64,7 @@ export default function CartPage() {
                                     <TableCell>{item.size}</TableCell>
                                     <TableCell className="text-right">₱{item.price.toFixed(2)}</TableCell>
                                     <TableCell>
-                                        <Button variant="ghost" size="icon" onclick={() => removeFromCart(index)}>
+                                        <Button variant="ghost" size="icon" onClick={() => removeFromCart(index)}>
                                             <Trash2 className="h-4 w-4" />
                                         </Button>
                                     </TableCell>
@@ -73,12 +73,11 @@ export default function CartPage() {
                             <TableRow>
                                 <TableCell colspan={2} className="font-bold">Total</TableCell>
                                 <TableCell className="text-right font-bodl">₱{getTotalPrice()}</TableCell>
-                                <TableCell></TableCell>
                             </TableRow>
                         </TableBody>
                      </Table>
                      <div className="mt-6 flex justify-end">
-                        <Button on click={handleCheckout}>Proceed to checkout</Button>
+                        <Button onClick={handleCheckout}>Proceed to checkout</Button>
                      </div>
                     </>
                 )}
