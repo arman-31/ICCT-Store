@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 import Image from "next/image"
 import Header from "../../components/Header"
 import { Button } from "app/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "app/components/ui/select"
 import { ArrowLeft } from "lucide-react"
 
 
