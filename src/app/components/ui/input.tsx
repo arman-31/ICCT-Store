@@ -1,14 +1,15 @@
 import React, { ChangeEvent } from 'react';
 
 interface InputProps {
-  type?: string;
-  id?: string;
-  name?: string;
-  value?: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-  className?: string;
-  required?: true
+  type: string;
+  id: string;
+  name: string;
+  value: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  className: string;
+  required: true;
+  image: string;
   // ... other input props
 }
 

@@ -7,11 +7,11 @@ export default function Logo() {
       <Image
         src="/icct_logo.svg" // Place icct_logo.svg in the public folder
         alt="School Logo"
-        width={50}  // Actual width of your logo
-        height={50} // Actual height of your logo
-        className="w-80 h-80" // Optional: Tailwind classes for styling
+        width={100}  // Actual width of your logo
+        height={100} // Actual height of your logo
+        className="w-70 h-70" // Optional: Tailwind classes for styling
       />
-      <span className="text-x5 font-bold text-gray-800">ICCT Store</span>
+      <span className="text-[30px] font-bold text-gray-800">ICCT Store</span>
     </Link>
   );
 }
