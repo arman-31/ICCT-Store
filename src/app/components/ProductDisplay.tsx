@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import Button from "./ui/button"
+import { Button } from "app/components/ui/button"
 
 const products = [
     { id: 1, name:"", image: "/placeholder.svg?height=300& width =300"},
