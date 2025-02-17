@@ -8,8 +8,8 @@ export default function SearchBar() {
             placeholder="Search..."
             className="w-full px-4 py-2 border voder-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button className="absolute right-2 top-1/2 border-gray-300 rounded-md focus:outline-none foucs:ring-2 focus:ring-blue-500">
-             <Search className="h-5 w-5 text-gray-400" />
+            <button className="absolute right-2 top-2 border-gray-300 rounded-md focus:outline-none foucs:ring-2 focus:ring-blue-500">
+             <Search className="h-10 w-10 text-gray-400" />
             </button>
         </div>
     )
