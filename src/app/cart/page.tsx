@@ -1,7 +1,7 @@
-"use client"
+use client
 
 import { useState, useEffect } from "react"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import Header from "../components/Header"
 import { Button } from "app/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "app/components/ui/Table"; 
