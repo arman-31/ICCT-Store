@@ -6,7 +6,7 @@ import Image from "next/image"
 import Header from "../../components/Header"
 import Button from "../../components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../components/ui/select"
-import { ArrowLeft, Router } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 
 
 const products = [
@@ -63,18 +63,18 @@ const products = [
         alert("Please select a size")
         return
       }
-      if (product.stock === 0) {
+      if (product?.stock === 0) {
         alert("Sorry, this product is out of stock")
         return
       }
       const newItem = {
-        id: product.id,
-        name: product.name,
-        price: product.price,
+        id: product?.id,
+        name: product?.name,
+        price: product?.price,
         size: selectedSize,
       }
       const updatedCart = [...cart, newItem]
-      setCart{updatedCart}
+      setCart;{updatedCart}
       localStorage.setItem("cart", JSON.stringify(updatedCart))
       alert("Product added to cart!")
     }

@@ -24,6 +24,8 @@ interface SelectValueProps {
   value: string;
 }
 
+
+
 // Create the Select component
 const Select: React.FC<SelectProps> = ({ value, onChange, children }) => {
   return <div className="select-container">{children}</div>;
@@ -49,7 +51,7 @@ const SelectContent: React.FC<SelectContentProps> = ({ children }) => {
 };
 
 // Create the SelectItem component
-const SelectItem: React.FC<SelectItemProps> = ({ value, children }) => {
+const SelectItem: React.FC<SelectItemProps> = ({ value, children}) => {
   return (
     <div
       className="select-item"
