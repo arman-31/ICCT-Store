@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import prisma from "../lib/prisma"
 import Header from "../components/Header"
-import Button from "../components/ui/button"
+import { Button } from "app/components/ui/button"
 
 export default async function OrderConfirmationPage({ params }: { params: { id: string } }) {
   const order = await prisma.order.findUnique({

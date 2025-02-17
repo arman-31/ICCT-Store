@@ -1,7 +1,7 @@
-import prisma from "@/lib/prisma"
-import Header from "@/app/components/Header"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import prisma from "app/lib/prisma"
+import Header from "../components/Header"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "app/components/ui/Table"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "app/components/ui/select"
 
 async function updateOrderStatus(orderId: string, status: string) {
   "use server"
@@ -34,7 +34,7 @@ export default async function AdminDashboard() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {orders.map((order) => (
+            {orders.map((order: { id: string; product: { name: any }; totalPrice: number; user: { studentNumber: any; name: any }; status: any }) => (
               <TableRow key={order.id}>
                 <TableCell>{order.id}</TableCell>
                 <TableCell>{order.product.name}</TableCell>
@@ -42,7 +42,7 @@ export default async function AdminDashboard() {
                 <TableCell>{order.user.studentNumber}</TableCell>
                 <TableCell>{order.user.name}</TableCell>
                 <TableCell>
-                  <Select defaultValue={order.status} onValueChange={(value) => updateOrderStatus(order.id, value)}>
+                  <Select defaultValue={order.status} onValueChange={(value: string) => updateOrderStatus(order.id, value)}>
                     <SelectTrigger>
                       <SelectValue>{order.status}</SelectValue>
                     </SelectTrigger>
