@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 import Image from "next/image"
 import Header from "../../components/Header"
-import Button from "../../components/ui/button"
+import { Button } from "app/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "../../components/ui/select"
 import { ArrowLeft } from "lucide-react"
 
@@ -87,7 +87,7 @@ const products = [
       <main className="min-h-screen bg-gray-100">
         <Header />
         <div className="container mx-auto mt-8 p-4">
-          <Button variant="outline" className="mb-4" onClick={() => router.push("/shop")}>
+          <Button variants="outline" className="mb-4" onClick={() => router.push("/shop")}>
             <ArrowLeft className="mr-2 h-4 w-4" /> Back to Shop
           </Button>
           <div className="bg-white rounded-lg shadow-md overflow-hidden">

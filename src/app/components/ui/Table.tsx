@@ -1,73 +1,73 @@
-import React, { ReactNode } from 'react';
+import * as React from "react"
 
-// Table Component
-interface TableProps {
-  children: ReactNode;
-  className?: string;
-}
+import { cn } from "app/lib/utils"
 
-const Table: React.FC<TableProps> = ({ children, className }) => {
-  return <table className={`table ${className || ''}`}>{children}</table>;
-};
+const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
+  ({ className, ...props }, ref) => (
+    <div className="w-full overflow-auto">
+      <table ref={ref} className={cn("w-full caption-bottom text-sm", className)} {...props} />
+    </div>
+  ),
+)
+Table.displayName = "Table"
 
-// TableBody Component
-interface TableBodyProps {
-  children: ReactNode;
-  className?: string;
-}
+const TableHeader = React.forwardRef<HTMLTableSectionElement, React.HTMLAttributes<HTMLTableSectionElement>>(
+  ({ className, ...props }, ref) => <thead ref={ref} className={cn("[&_tr]:border-b", className)} {...props} />,
+)
+TableHeader.displayName = "TableHeader"
 
-const TableBody: React.FC<TableBodyProps> = ({ children, className }) => {
-  return <tbody className={`table-body ${className || ''}`}>{children}</tbody>;
-};
+const TableBody = React.forwardRef<HTMLTableSectionElement, React.HTMLAttributes<HTMLTableSectionElement>>(
+  ({ className, ...props }, ref) => (
+    <tbody ref={ref} className={cn("[&_tr:last-child]:border-0", className)} {...props} />
+  ),
+)
+TableBody.displayName = "TableBody"
 
-// TableCell Component
-interface TableCellProps {
-  children: ReactNode;
-  className?: string;
-  colspan?: number;
-}
+const TableFooter = React.forwardRef<HTMLTableSectionElement, React.HTMLAttributes<HTMLTableSectionElement>>(
+  ({ className, ...props }, ref) => (
+    <tfoot ref={ref} className={cn("bg-primary font-medium text-primary-foreground", className)} {...props} />
+  ),
+)
+TableFooter.displayName = "TableFooter"
 
-const TableCell: React.FC<TableCellProps> = ({ children, className }) => {
-  return <td className={`table-cell ${className || ''}`}>{children}</td>;
-};
+const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(
+  ({ className, ...props }, ref) => (
+    <tr
+      ref={ref}
+      className={cn("border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted", className)}
+      {...props}
+    />
+  ),
+)
+TableRow.displayName = "TableRow"
 
-// TableHead Component
-interface TableHeadProps {
-    children?: ReactNode; // Add the question mark to make it optional
-    className?: string;
-  }
+const TableHead = React.forwardRef<HTMLTableCellElement, React.ThHTMLAttributes<HTMLTableCellElement>>(
+  ({ className, ...props }, ref) => (
+    <th
+      ref={ref}
+      className={cn(
+        "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+        className,
+      )}
+      {...props}
+    />
+  ),
+)
+TableHead.displayName = "TableHead"
 
-const TableHead: React.FC<TableHeadProps> = ({ children, className }) => {
-  return <thead className={`table-head ${className || ''}`}>{children}</thead>;
-};
+const TableCell = React.forwardRef<HTMLTableCellElement, React.TdHTMLAttributes<HTMLTableCellElement>>(
+  ({ className, ...props }, ref) => (
+    <td ref={ref} className={cn("p-4 align-middle [&:has([role=checkbox])]:pr-0", className)} {...props} />
+  ),
+)
+TableCell.displayName = "TableCell"
 
-// TableHeader Component
-interface TableHeaderProps {
-  children: ReactNode;
-  className?: string;
-}
+const TableCaption = React.forwardRef<HTMLTableCaptionElement, React.HTMLAttributes<HTMLTableCaptionElement>>(
+  ({ className, ...props }, ref) => (
+    <caption ref={ref} className={cn("mt-4 text-sm text-muted-foreground", className)} {...props} />
+  ),
+)
+TableCaption.displayName = "TableCaption"
 
-const TableHeader: React.FC<TableHeaderProps> = ({ children, className }) => {
-  return <th className={`table-header ${className || ''}`}>{children}</th>;
-};
+export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption }
 
-// TableRow Component
-interface TableRowProps {
-  children: ReactNode;
-  className?: string;
-}
-
-interface TableCellProps {
-    children: ReactNode; // Add the question mark to make it optional
-    className?: string;
-    colspan?: number;
-    rowspan?: number;
-    // ... other props
-  }
-
-const TableRow: React.FC<TableRowProps> = ({ children, className }) => {
-  return <tr className={`table-row ${className || ''}`}>{children}</tr>;
-};
-
-
-export { Table, TableBody, TableCell, TableHead, TableHeader, TableRow };
