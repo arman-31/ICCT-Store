@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import Header from "../../components/Header"
+import { Header } from "../../components/Header"
 import { Button } from "app/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "app/components/ui/select"
 import { ArrowLeft } from "lucide-react"

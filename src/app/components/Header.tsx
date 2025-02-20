@@ -6,7 +6,7 @@ import Logo from "./Logo"
 import SearchBar from "./SearchBar"
 import AuthForm from "./AuthForm"
 import { ShoppingCart, User } from "lucide-react"
-import { Button } from "@radix-ui/themes"
+import { Button } from "app/components/ui/button"
 import {Input} from "app/components/ui/input"
 
 export function Header() {
@@ -26,13 +26,13 @@ export function Header() {
   
             <div className="flex items-center gap-4">
               <Link href="/auth/login">
-                <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                <Button variants="ghost" size="sm" className="flex items-center gap-2">
                   <User className="h-4 w-4" />
                   <span className="hidden sm:inline">Login</span>
                 </Button>
               </Link>
               <Link href="/cart">
-                <Button variant="outline" size="sm" className="flex items-center gap-2">
+                <Button variants="outline" size="sm" className="flex items-center gap-2">
                   <ShoppingCart className="h-4 w-4" />
                   <span className="hidden sm:inline">Cart</span>
                 </Button>
