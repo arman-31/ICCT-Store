@@ -4,7 +4,7 @@ import type React  from "react"
 
 import { useState } from "react"
 import { useRouter} from "next/navigation"
-import Header from "../components/Header"
+import { Header } from "../components/Header"
 import  { Button }  from "app/components/ui/button"
 import  {Input } from "app/components/ui/input"
 import  { Label } from "app/components/ui/label"
