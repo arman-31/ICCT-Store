@@ -3,7 +3,6 @@ import { Slot} from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "app/lib/utils"
-import { BellRing } from "lucide-react"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-backround transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visble:ringoffset-2 disabled:pointer-events-none disable:opacity-50",

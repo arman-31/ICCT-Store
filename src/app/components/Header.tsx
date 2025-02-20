@@ -5,45 +5,43 @@ import Link from "next/link"
 import Logo from "./Logo"
 import SearchBar from "./SearchBar"
 import AuthForm from "./AuthForm"
-import { ShoppingCart } from "lucide-react"
+import { ShoppingCart, User } from "lucide-react"
+import { Button } from "@radix-ui/themes"
+import {Input} from "app/components/ui/input"
 
-export default function Header() {
-    const [cartItemCount, setCartItemCount] = useState(0)
-
-    useEffect(() => {
-        const updateCartCount = () => {
-            const saveCart = localStorage.getItem("cart")
-            if (saveCart) {
-                const cart = JSON.parse(saveCart)
-                setCartItemCount(cart.length)
-            }
-        }
-
-        updateCartCount()
-        window.addEventListener("storage", updateCartCount)
-        return () => window.removeEventListener("storage", updateCartCount)
-    }, [])
-
+export function Header() {
     return (
-        <header className="bg-white shadow">
-            <div className="container mx-auto px-4 py-4 flex flex-col
-             md:flex-row items-center justify-between">
-                <Logo />
-                <SearchBar />
-                <div className="flex items-center space-x-4">
-                    <AuthForm />
-                    <Link href="/cart" className="relative">
-                     <ShoppingCart className="w-5 h-6" />
-                     {cartItemCount > 0 && (
-                        <span className="absolute -top-2 -right-2
-                         bg-red-500 text-white rounded-full w-5 h-5 flex
-                         item-center justify-center text-xs">
-                            {cartItemCount}
-                         </span>
-                     )}
-                    </Link>
-                </div>
-             </div>
-        </header>
+      <header className="border-b">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <Link href="/" className="font-bold text-xl">
+                School Store
+              </Link>
+            </div>
+  
+            <div className="hidden md:flex flex-1 max-w-md mx-4">
+              <Input type="search" placeholder="Search products..." className="w-full" />
+            </div>
+  
+            <div className="flex items-center gap-4">
+              <Link href="/auth/login">
+                <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                  <User className="h-4 w-4" />
+                  <span className="hidden sm:inline">Login</span>
+                </Button>
+              </Link>
+              <Link href="/cart">
+                <Button variant="outline" size="sm" className="flex items-center gap-2">
+                  <ShoppingCart className="h-4 w-4" />
+                  <span className="hidden sm:inline">Cart</span>
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </header>
     )
-} 
+  }
+  
+  
