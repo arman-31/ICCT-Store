@@ -9,7 +9,7 @@ export default function AuthForm() {
         <Link href="/login">
          <Button variants="outline">Log In</Button>
         </Link>
-        <Link href="/sighup">
+        <Link href="/signup">
          <Button>Sign Up</Button>
         </Link>
      </div>
