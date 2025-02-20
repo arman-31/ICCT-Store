@@ -13,7 +13,7 @@ export function Header() {
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <Link href="/" className="font-bold text-xl">
-                School Store
+                ICCT Store
               </Link>
             </div>
   
@@ -22,7 +22,7 @@ export function Header() {
             </div>
   
             <div className="flex items-center gap-4">
-              <Link href="/auth/login">
+              <Link href="app/auth">
                 <Button variants="ghost" size="sm" className="flex items-center gap-2">
                   <User className="h-4 w-4" />
                   <span className="hidden sm:inline">Login</span>
