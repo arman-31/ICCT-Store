@@ -27,7 +27,7 @@ export default function AdminLoginPage() {
 
         try {
 
-            if (formData.username === "admin" && formData.password === "password") {
+            if (formData.username === "admin" && formData.password === "ADmin1234") {
                 // Simulate API call delay
                 await new Promise((resolve) => setTimeout(resolve, 1000))
                 router.push("/admin")
