@@ -2,9 +2,6 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import Logo from "./Logo"
-import SearchBar from "./SearchBar"
-import AuthForm from "./AuthForm"
 import { ShoppingCart, User } from "lucide-react"
 import { Button } from "app/components/ui/button"
 import {Input} from "app/components/ui/input"
