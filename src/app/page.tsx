@@ -1,4 +1,4 @@
-import Header from "./components/Header"
+import { Header } from "./components/Header"
 import ProductDisplay from "./components/ProductDisplay"
 
 export default function Home() {
