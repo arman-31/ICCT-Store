@@ -5,16 +5,16 @@ import Image from "next/image"
 import { ShoppingCart, User } from "lucide-react"
 import { Button } from "app/components/ui/button"
 import { Input } from "app/components/ui/input"
+import Logo from "./Logo"
 
 export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b glass-effect-strong">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between gap-4">
+          <Logo />
           <div className="flex items-center gap-3">
-            <Link href="/Logo" className="flex items-center gap-2">
               <span className="font-bold text-xl text-white">ICCT Store</span>
-            </Link>
           </div>
 
           <div className="hidden md:flex flex-1 max-w-md mx-4">
