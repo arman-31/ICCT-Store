@@ -7,7 +7,7 @@ export function BackgroundWrapper({ children }: { children: React.ReactNode }) {
       {/* Fixed background image */}
       <div className="fixed inset-0 -z-10">
         <Image
-          src="/placeholder.svg?height=1080&width=1920"
+          src="Assets/image"
           alt="Background"
           fill
           className="object-cover opacity-10 dark:opacity-5"
