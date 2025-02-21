@@ -93,7 +93,7 @@ export default function LoginPage() {
       {/* Image Side */}
       <div className="hidden md:block relative bg-muted">
         <Image
-          src="/placeholder.svg?height=1080&width=1920"
+          src="/main campus.png?height=1080&width=1920"
           alt="School campus"
           fill
           className="object-cover"
