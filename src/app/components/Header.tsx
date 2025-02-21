@@ -12,7 +12,7 @@ export function Header() {
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <Link href="/" className="font-bold text-xl">
-              School Store
+              ICCT Store
             </Link>
           </div>
 
