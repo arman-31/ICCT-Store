@@ -99,12 +99,6 @@ export default function LoginPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-background/20 p-8 flex items-end">
-          <blockquote className="text-white max-w-lg space-y-2">
-            <p className="text-lg font-medium">"Education is not preparation for life; education is life itself."</p>
-            <footer className="text-sm">- John Dewey</footer>
-          </blockquote>
-        </div>
       </div>
     </div>
   )
