@@ -21,7 +21,7 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-4">
-            <Link href="/auth/login">
+            <Link href="app/auth/Login">
               <Button variants="ghost" size="sm" className="flex items-center gap-2 text-white hover:bg-white/20">
                 <User className="h-4 w-4" />
                 <span className="hidden sm:inline">Login</span>
