@@ -12,11 +12,8 @@ export function Header() {
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="relative w-8 h-8">
-                <Image src="/placeholder.svg?height=32&width=32" alt="Logo" fill className="object-contain" />
-              </div>
-              <span className="font-bold text-xl text-white">School Store</span>
+            <Link href="/Logo" className="flex items-center gap-2">
+              <span className="font-bold text-xl text-white">ICCT Store</span>
             </Link>
           </div>
 
