@@ -11,7 +11,7 @@ export default function Logo() {
         height={100} // Actual height of your logo
         className="w-70 h-70" // Optional: Tailwind classes for styling
       />
-      <span className="text-[30px] font-bold text-gray-800">ICCT Store</span>
+      <span className="text-[30px] font-bold text-white-800">ICCT Store</span>
     </Link>
   );
 }
