@@ -114,20 +114,12 @@ export default function SignUpPage() {
       {/* Image Side */}
       <div className="hidden md:block relative bg-muted">
         <Image
-          src="/placeholder.svg?height=1080&width=1920"
+          src="/main campus.png?height=1080&width=1920"
           alt="School campus"
           fill
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-background/20 p-8 flex items-end">
-          <blockquote className="text-white max-w-lg space-y-2">
-            <p className="text-lg font-medium">
-              "The beautiful thing about learning is that no one can take it away from you."
-            </p>
-            <footer className="text-sm">- B.B. King</footer>
-          </blockquote>
-        </div>
       </div>
     </div>
   )
