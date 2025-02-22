@@ -6,27 +6,27 @@ export default function Home() {
   const featuredProducts = [
     {
       id: 1,
-      name: "School Hoodie",
+      name: "",
       image: "/placeholder.svg?height=400&width=400",
-      price: 39.99,
+      price: 0,
     },
     {
       id: 2,
-      name: "School T-Shirt",
+      name: "",
       image: "/placeholder.svg?height=400&width=400",
-      price: 19.99,
+      price: 0,
     },
     {
       id: 3,
-      name: "School Cap",
+      name: "",
       image: "/placeholder.svg?height=400&width=400",
-      price: 14.99,
+      price: 0,
     },
     {
       id: 4,
-      name: "School Backpack",
+      name: "",
       image: "/placeholder.svg?height=400&width=400",
-      price: 49.99,
+      price: 0,
     },
   ]
 
