@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "mongodb+srv://Arman-31:<db_password>@icct-store.yoct9.mongodb.net/",
+            "request": "launch",
+            "url": "mongodb+srv://Arman-31:<db_password>@icct-store.yoct9.mongodb.net/"
+        }
+    ]
+}
