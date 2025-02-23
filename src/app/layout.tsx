@@ -29,7 +29,7 @@ export default function RootLayout({
           </div>
           </BackgroundWrapper>   
       </body>
-    </html>
+    </html> 
   )
 }
 
