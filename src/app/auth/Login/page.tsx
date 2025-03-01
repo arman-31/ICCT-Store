@@ -3,71 +3,89 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Loader2 } from "lucide-react"
+import Link from "next/link"
+import Image from "next/image"
 import { Button } from "app/components/ui/button"
 import { Input } from "app/components/ui/input"
 import { Label } from "app/components/ui/label"
-import Link from "next/link"
 
 export default function LoginPage() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  })
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
-    // Add your login logic here
-    setTimeout(() => setIsLoading(false), 2000)
+    // Handle login form submission
+    console.log(formData)
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-blue-700 via-purple-700 to-pink-700">
-      <div className="rounded-xl glass-effect shadow text-white w-full max-w-md">
-        <div className="flex flex-col space-y-1.5 p-6">
-          <h2 className="text-2xl font-semibold text-center">Welcome Back</h2>
-          <p className="text-sm text-center text-gray-300">Please sign in to continue</p>
-        </div>
-        <div className="p-6 pt-0">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-white">
-                Email
-              </Label>
+    <div className="min-h-screen grid md:grid-cols-2">
+      {/* Form Side */}
+      <div className="flex items-center justify-center p-4 md:p-8 rounded-xl glass-effect shadow text-white w-full max-w-md">
+        <div className="w-full max-w-md">
+          <h1 className="text-2xl font-bold text-center mb-6">Login to Your Account</h1>
+
+          <form onSubmit={handleSubmit} className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                placeholder="Enter your email"
                 type="email"
+                value={formData.email}
+                onChange={(e: { target: { value: any } }) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="Enter your email"
                 required
-                className="bg-white/5 border-white/10 text-white placeholder:text-gray-400"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-white">
-                Password
-              </Label>
+
+            <div className="grid gap-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password">Password</Label>
+                <Link href="/auth/forgot-password" className="text-sm text-primary hover:underline">
+                  Forgot password?
+                </Link>
+              </div>
               <Input
                 id="password"
                 type="password"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 placeholder="Enter your password"
                 required
-                className="bg-white/5 border-white/10 text-white placeholder:text-gray-400"
               />
             </div>
-            <Button type="submit" className="w-full bg-white/10 hover:bg-white/20 text-white" disabled={isLoading}>
-              {isLoading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Signing in...
-                </>
-              ) : (
-                "Sign In"
-              )}
+
+            <Button type="submit" className="w-full">
+              Login
             </Button>
-            <div className="text-sm text-center text-gray-300">
-              Don't have an account?{" "}
-              <Link href="/signup" className="text-white hover:underline">
+
+            <div className="relative my-4">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+              </div>
+            </div>
+
+            <div className="grid gap-2">
+              <Button variants="outline" type="button" className="w-full">
+                Google
+              </Button>
+              <Button variants="outline" type="button" className="w-full">
+                Facebook
+              </Button>
+            </div>
+
+            <p className="text-center text-sm text-muted-foreground">
+              Don&apos;t have an account?{" "}
+              <Link href="/auth/signup" className="text-primary hover:underline">
                 Sign up
               </Link>
-            </div>
+            </p>
           </form>
         </div>
       </div>
