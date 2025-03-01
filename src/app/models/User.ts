@@ -15,7 +15,7 @@ export class UserModel {
   static async findById(id: number): Promise<User | null> {
     const users = await executeQuery<User[]>({
       query: "SELECT * FROM users WHERE id = ?",
-      value: [id],
+      values: [id],
     })
     return users[0] || null
   }
@@ -23,7 +23,7 @@ export class UserModel {
   static async findByEmail(email: string): Promise<User | null> {
     const users = await executeQuery<User[]>({
       query: "SELECT * FROM users WHERE email = ?",
-      value: [email],
+      values: [email],
     })
     return users[0] || null
   }
@@ -34,7 +34,7 @@ export class UserModel {
         INSERT INTO users (full_name, student_id, email, password, role, active)
         VALUES (?, ?, ?, ?, ?, ?)
       `,
-      value: [user.full_name, user.student_id, user.email, user.password, user.role, user.active],
+      values: [user.full_name, user.student_id, user.email, user.password, user.role, user.active],
     })
     return this.findById(result.insertId)
   }

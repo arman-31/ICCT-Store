@@ -3,124 +3,109 @@
 import type React from "react"
 
 import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
+import { Loader2 } from "lucide-react"
 import { Button } from "app/components/ui/button"
 import { Input } from "app/components/ui/input"
 import { Label } from "app/components/ui/label"
+import Link from "next/link"
 
-export default function SignUpPage() {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    studentId: "",
-    email: "",
-    password: "",
-  })
+export default function SignupPage() {
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Handle form submission
-    console.log(formData)
+    setIsLoading(true)
+    // Add your signup logic here
+    setTimeout(() => setIsLoading(false), 2000)
   }
 
   return (
-    <div className="min-h-screen grid md:grid-cols-2">
-      {/* Form Side */}
-      <div className="flex items-center justify-center p-4 md:p-8">
-        <div className="w-full max-w-md">
-          <h1 className="text-2xl font-bold text-center mb-6">Create an Account</h1>
-
-          <form onSubmit={handleSubmit} className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="fullName">Full Name</Label>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-blue-700 via-purple-700 to-pink-700">
+      <div className="rounded-xl glass-effect shadow text-white w-full max-w-md">
+        <div className="flex flex-col space-y-1.5 p-6">
+          <h2 className="text-2xl font-semibold text-center">Create Account</h2>
+          <p className="text-sm text-center text-gray-300">Sign up to get started</p>
+        </div>
+        <div className="p-6 pt-0">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="fullName" className="text-white">
+                Full Name
+              </Label>
               <Input
                 id="fullName"
-                type="text"
-                value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 placeholder="Enter your full name"
                 required
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-400"
               />
             </div>
-
-            <div className="grid gap-2">
-              <Label htmlFor="studentId">Student ID</Label>
+            <div className="space-y-2">
+              <Label htmlFor="studentId" className="text-white">
+                Student ID
+              </Label>
               <Input
                 id="studentId"
-                type="text"
-                value={formData.studentId}
-                onChange={(e) => setFormData({ ...formData, studentId: e.target.value })}
                 placeholder="Enter your student ID"
                 required
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-400"
               />
             </div>
-
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-white">
+                Email
+              </Label>
               <Input
                 id="email"
                 type="email"
-                value={formData.email}
-                onChange={(e: { target: { value: any } }) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="Enter your email"
                 required
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-400"
               />
             </div>
-
-            <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-white">
+                Password
+              </Label>
               <Input
                 id="password"
                 type="password"
-                value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 placeholder="Create a password"
                 required
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-400"
               />
             </div>
-
-            <Button type="submit" className="w-full">
-              Sign Up
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword" className="text-white">
+                Confirm Password
+              </Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="Confirm your password"
+                required
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-400"
+              />
+            </div>
+            <Button type="submit" className="w-full bg-white/10 hover:bg-white/20 text-white" disabled={isLoading}>
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Creating account...
+                </>
+              ) : (
+                "Sign Up"
+              )}
             </Button>
-
-            <div className="relative my-4">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
-              </div>
-            </div>
-
-            <div className="grid gap-2">
-              <Button variants="outline" type="button" className="w-full">
-                Google
-              </Button>
-              <Button variants="outline" type="button" className="w-full">
-                Facebook
-              </Button>
-            </div>
-
-            <p className="text-center text-sm text-muted-foreground">
+            <div className="text-sm text-center text-gray-300">
               Already have an account?{" "}
-              <Link href="/auth/Login" className="text-primary hover:underline">
-                Login
+              <Link href="/login" className="text-white hover:underline">
+                Sign in
               </Link>
-            </p>
+            </div>
           </form>
         </div>
-      </div>
-
-      {/* Image Side */}
-      <div className="hidden md:block relative bg-muted">
-        <Image
-          src="/main campus.png?height=1080&width=1920"
-          alt="School campus"
-          fill
-          className="object-cover"
-          priority
-        />
       </div>
     </div>
   )
 }
+

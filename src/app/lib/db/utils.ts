@@ -1,6 +1,6 @@
-import Product from "app/models/Product"
-import Category from "app/models/Category"
-import Order from "app/models/Order"
+import Product, { ProductModel } from "app/models/Product";
+import Category from "app/models/Category";
+import Order from "app/models/Order";
 
 export async function getProducts(query = {}) {
   try {
@@ -43,14 +43,14 @@ export async function updateStock(productId: string, size: string, quantity: num
     const product = await Product.findById(productId)
     if (!product) throw new Error("Product not found")
 
-    const sizeIndex = product.sizes.findIndex((s: { name: string }) => s.name === size)
+    const sizeIndex = product.sizes.findIndex((s: { name: string; }) => s.name === size)
     if (sizeIndex === -1) throw new Error("Size not found")
 
     const newStock = product.sizes[sizeIndex].stock - quantity
     if (newStock < 0) throw new Error("Insufficient stock")
 
     product.sizes[sizeIndex].stock = newStock
-    product.totalStock = product.sizes.reduce((acc: any, size: { stock: any }) => acc + size.stock, 0)
+    product.totalStock = product.sizes.reduce((acc: any, size: { stock: any; }) => acc + size.stock, 0)
 
     await product.save()
     return product

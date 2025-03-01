@@ -73,3 +73,4 @@ export class ProductModel {
   }
 }
 
+export default Product
