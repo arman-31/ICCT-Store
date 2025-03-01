@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 import connectDB from "app/lib/db"
-import User from "app/models/User"
+import {User} from "app/models/User"
+
+
 
 export async function POST(request: Request) {
   try {
@@ -36,3 +38,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Failed to create user" }, { status: 500 })
   }
 }
+

@@ -1,76 +1,75 @@
-import mongoose from "mongoose"
+import { executeQuery } from "app/lib/db"
 
-const sizeSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    enum: ["XS", "S", "M", "L", "XL", "XXL", "One Size"],
-  },
-  stock: {
-    type: Number,
-    required: true,
-    min: [0, "Stock cannot be negative"],
-  },
-})
+export interface Product {
+  id: number
+  name: string
+  slug: string
+  description: string
+  price: number
+  category_id: number
+  featured: boolean
+  active: boolean
+  created_at: Date
+  updated_at: Date
+  images?: string[]
+  sizes?: ProductSize[]
+}
 
-const productSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: [true, "Product name is required"],
-      trim: true,
-    },
-    slug: {
-      type: String,
-      unique: true,
-      lowercase: true,
-    },
-    description: {
-      type: String,
-      required: [true, "Product description is required"],
-    },
-    price: {
-      type: Number,
-      required: [true, "Product price is required"],
-      min: [0, "Price cannot be negative"],
-    },
-    images: [
-      {
-        type: String,
-        required: [true, "At least one product image is required"],
-      },
-    ],
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
-      required: [true, "Product category is required"],
-    },
-    sizes: [sizeSchema],
-    featured: {
-      type: Boolean,
-      default: false,
-    },
-    active: {
-      type: Boolean,
-      default: true,
-    },
-    totalStock: {
-      type: Number,
-      default: 0,
-    },
-  },
-  {
-    timestamps: true,
-  },
-)
+export interface ProductSize {
+  size: string
+  stock: number
+}
 
-// Create slug from name before saving
-productSchema.pre("save", function (next) {
-  this.slug = this.name.toLowerCase().replace(/ /g, "-")
-  // Calculate total stock
-  this.totalStock = this.sizes.reduce((acc, size) => acc + size.stock, 0)
-  next()
-})
+export class ProductModel {
+  static update(arg0: number, data: any) {
+    throw new Error("Method not implemented.")
+  }
+  static async findAll(): Promise<Product[]> {
+    const products = await executeQuery<Product[]>({
+      query: `
+        SELECT p.*, 
+          GROUP_CONCAT(DISTINCT pi.image_url) as images,
+          GROUP_CONCAT(DISTINCT CONCAT(ps.size, ':', ps.stock)) as sizes
+        FROM products p
+        LEFT JOIN product_images pi ON p.id = pi.product_id
+        LEFT JOIN product_sizes ps ON p.id = ps.product_id
+        WHERE p.active = true
+        GROUP BY p.id
+      `,
+    })
 
-export default mongoose.models.Product || mongoose.model("Product", productSchema)
+    return products.map(this.formatProduct)
+  }
+
+  static async findById(id: number): Promise<Product | null> {
+    const products = await executeQuery<Product[]>({
+      query: `
+        SELECT p.*, 
+          GROUP_CONCAT(DISTINCT pi.image_url) as images,
+          GROUP_CONCAT(DISTINCT CONCAT(ps.size, ':', ps.stock)) as sizes
+        FROM products p
+        LEFT JOIN product_images pi ON p.id = pi.product_id
+        LEFT JOIN product_sizes ps ON p.id = ps.product_id
+        WHERE p.id = ?
+        GROUP BY p.id
+      `,
+      value: [id],
+    })
+
+    return products[0] ? this.formatProduct(products[0]) : null
+  }
+
+  private static formatProduct(product: any): Product {
+    return {
+      ...product,
+      images: product.images ? product.images.split(",") : [],
+      sizes: product.sizes
+        ? product.sizes.split(",").map((size: string) => {
+            const [name, stock] = size.split(":")
+            return { size: name, stock: Number.parseInt(stock) }
+          })
+        : [],
+    }
+  }
+}
 

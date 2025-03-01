@@ -1,29 +1,26 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+import mysql from "mysql2/promise"
 
-dotenv.config(); // Load .env file
+const pool = mysql.createPool({
+  host: process.env.MYSQL_HOST,
+  suer: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSQORD,
+  database: process.env.MYSQL_DATABASE,
+  waitForConnection: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+})
 
-const MONGODB_URI = process.env.MONGODB_URI;
-if (!MONGODB_URI) {
-  throw new Error("❌ Please define the MONGODB_URI environment variable in .env");
-}
+export async function executeQuery<T>({ query, value}: {
+  query: string; value?: any[] }): Promise<T> {
+    try {
+      const [result] = await pool.execute(query, value)
+      return result as T
+    } catch (error) {
+      throw new Error(error instaceof Error ? error.message :
+        "Database error")
+    }
+  }
 
-let cached = (global as any).mongoose || { conn: null, promise: null };
-
-if (!cached.conn) {
-  cached.promise = mongoose.connect(MONGODB_URI, {
-    bufferCommands: false,
-  }).then((mongoose) => {
-    console.log("✅ MongoDB Connected Successfully!");
-    return mongoose;
-  }).catch((error) => {
-    console.error("❌ MongoDB Connection Failed:", error);
-    throw error;
-  });
-
-  cached.conn = await cached.promise;
-}
-
-export default cached.conn;
+  export default pool
 
   

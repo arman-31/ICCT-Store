@@ -1,34 +1,43 @@
-import mongoose from "mongoose"
+import { executeQuery } from "app/lib/db"
 
-const userSchema = new mongoose.Schema({
-  fullName: {
-    type: String,
-    required: true,
-  },
-  studentId: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    enum: ["user", "admin"],
-    default: "user",
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-})
+export interface User {
+  id: number
+  full_name: string
+  student_id: string
+  email: string
+  role: "user" | "admin"
+  active: boolean
+  created_at: Date
+  updated_at: Date
+}
 
-export default mongoose.models.User || mongoose.model("User", userSchema)
+export class UserModel {
+  static async findById(id: number): Promise<User | null> {
+    const users = await executeQuery<User[]>({
+      query: "SELECT * FROM users WHERE id = ?",
+      value: [id],
+    })
+    return users[0] || null
+  }
 
+  static async findByEmail(email: string): Promise<User | null> {
+    const users = await executeQuery<User[]>({
+      query: "SELECT * FROM users WHERE email = ?",
+      value: [email],
+    })
+    return users[0] || null
+  }
+
+  static async create(user: Omit<User, "id" | "created_at" | "updated_at">): Promise<User> {
+    const result = await executeQuery<any>({
+      query: `
+        INSERT INTO users (full_name, student_id, email, password, role, active)
+        VALUES (?, ?, ?, ?, ?, ?)
+      `,
+      value: [user.full_name, user.student_id, user.email, user.password, user.role, user.active],
+    })
+    return this.findById(result.insertId)
+  }
+}
+
+export default User
