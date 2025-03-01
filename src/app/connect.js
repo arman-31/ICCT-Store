@@ -1,14 +1,12 @@
-import mongoose from "mongoose";
+var mysql = require('mysql');
 
-async function connectDB() {
-  try {
-    await mongoose.connect("mongodb+srv://Arman-31:12311561@icct-store.yoct9.mongodb.net/ICCT-Store?retryWrites=true&w=majority");
-    console.log("✅ MongoDB Connected!");
-  } catch (err) {
-    console.error("❌ MongoDB Connection Error:", err);
-    process.exit(1);
-  }
-}
+var con = mysql.createConnection({
+  host: "127.0.0.1",
+  user: "ICCT",
+  password: "12311561"
+});
 
-connectDB();
-
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+})
