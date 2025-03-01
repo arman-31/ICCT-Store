@@ -13,12 +13,12 @@ params: { id: string } }) {
                  updated_at = CURRENT_TIMESTAMP
               WHERE id = ?
             `,
-            value: [status, params.id],
+            values: [status, params.id],
         })
 
         const [order] = await executeQuery<any[]>({
             query: "SELECT * FROM orders WHERE id = ?",
-            value: [params.id],
+            values: [params.id],
         })
 
         return NextResponse.json(order)
