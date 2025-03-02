@@ -1,4 +1,5 @@
 import { executeQuery } from "app/lib/db"
+import { parseDatabaseResponse, parseDatabaseResponseArray, parseCategory } from "app/lib/db/utils"
 
 export interface Category {
   id: number
@@ -26,7 +27,7 @@ export class CategoryModel {
         ORDER BY c.name ASC
       `,
     })
-    return categories
+    return parseDatabaseResponseArray(categories, parseCategory)
   }
 
   static async findById(id: number): Promise<Category | null> {
@@ -42,7 +43,7 @@ export class CategoryModel {
       `,
       values: [id],
     })
-    return categories[0] || null
+    return parseDatabaseResponse(categories[0], parseCategory) || null
   }
 
   static async findBySlug(slug: string): Promise<Category | null> {
@@ -58,10 +59,10 @@ export class CategoryModel {
       `,
       values: [slug],
     })
-    return categories[0] || null
+    return parseDatabaseResponse(categories[0], parseCategory) || null
   }
 
-  static async create(category: Omit<Category, "id" | "created_at" | "updated_at">): Promise<Category> {
+  static async create(data: Omit<Category, "id" | "created_at" | "updated_at">): Promise<Category> {
     const result = await executeQuery<any>({
       query: `
         INSERT INTO categories (
@@ -72,38 +73,48 @@ export class CategoryModel {
           active
         ) VALUES (?, ?, ?, ?, ?)
       `,
-      values: [category.name, category.slug, category.description, category.image_url, category.active],
+      values: [data.name, data.slug, data.description, data.image_url, data.active],
     })
 
-    return this.findById(result.insertId)
+    const category = await this.findById(result.insertId)
+    if (!category) {
+      throw new Error("Failed to create category")
+    }
+    return category
   }
 
-  static async update(id: number, category: Partial<Category>): Promise<Category | null> {
+  static async update(id: number, data: Partial<Category>): Promise<Category> {
     const updates = []
     const values = []
 
-    if (category.name) {
+    if (data.name) {
       updates.push("name = ?")
-      values.push(category.name)
+      values.push(data.name)
     }
-    if (category.slug) {
+    if (data.slug) {
       updates.push("slug = ?")
-      values.push(category.slug)
+      values.push(data.slug)
     }
-    if (category.description !== undefined) {
+    if (data.description !== undefined) {
       updates.push("description = ?")
-      values.push(category.description)
+      values.push(data.description)
     }
-    if (category.image_url !== undefined) {
+    if (data.image_url !== undefined) {
       updates.push("image_url = ?")
-      values.push(category.image_url)
+      values.push(data.image_url)
     }
-    if (category.active !== undefined) {
+    if (data.active !== undefined) {
       updates.push("active = ?")
-      values.push(category.active)
+      values.push(data.active)
     }
 
-    if (updates.length === 0) return this.findById(id)
+    if (updates.length === 0) {
+      const existingCategory = await this.findById(id)
+      if (!existingCategory) {
+        throw new Error("Category not found")
+      }
+      return existingCategory
+    }
 
     values.push(id)
 
@@ -116,23 +127,28 @@ export class CategoryModel {
       values,
     })
 
-    return this.findById(id)
+    const updatedCategory = await this.findById(id)
+    if (!updatedCategory) {
+      throw new Error("Category not found")
+    }
+    return updatedCategory
   }
 
   static async delete(id: number): Promise<boolean> {
-    try {
-      await executeQuery({
-        query: "DELETE FROM categories WHERE id = ?",
-        values: [id],
-      })
-      return true
-    } catch (error) {
+    const category = await this.findById(id)
+    if (!category) {
       return false
     }
+
+    await executeQuery({
+      query: "DELETE FROM categories WHERE id = ?",
+      values: [id],
+    })
+    return true
   }
 
   static async getProductsByCategory(categoryId: number): Promise<any[]> {
-    return executeQuery({
+    const products = await executeQuery<any[]>({
       query: `
         SELECT 
           p.*,
@@ -152,6 +168,7 @@ export class CategoryModel {
       `,
       values: [categoryId],
     })
+    return products
   }
 }
 

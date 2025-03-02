@@ -1,5 +1,6 @@
 import mysql from "mysql2/promise"
 
+// Create the connection pool
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
@@ -10,7 +11,14 @@ const pool = mysql.createPool({
   queueLimit: 0,
 })
 
-export async function executeQuery<T>({ query, values }: { query: string; values?: any[] }): Promise<T> {
+// Type for query parameters
+interface QueryParams {
+  query: string
+  values?: any[]
+}
+
+// Execute query function
+export async function executeQuery<T>({ query, values }: QueryParams): Promise<T> {
   try {
     const [result] = await pool.execute(query, values)
     return result as T
@@ -19,5 +27,7 @@ export async function executeQuery<T>({ query, values }: { query: string; values
   }
 }
 
-export default pool
+// Export both pool and executeQuery
+export { pool }
+
 

@@ -12,19 +12,19 @@ import { Separator } from "app/components/ui/separator"
 const initialCartItems = [
   {
     id: 1,
-    name: "School Hoodie",
+    name: "cas",
     size: "L",
     price: 39.99,
     quantity: 1,
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/cas.jpg?height=200&width=200",
   },
   {
     id: 2,
-    name: "School T-Shirt",
+    name: "ishtm",
     size: "M",
     price: 19.99,
     quantity: 2,
-    image: "/placeholder.svg?height=200&width=200",
+    image: "/ishtm.jpg?height=200&width=200",
   },
 ]
 
@@ -124,16 +124,16 @@ export default function CartPage() {
             <CardContent className="grid gap-4">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>${subtotal.toFixed(2)}</span>
+                <span>₱{subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
-                <span>${shipping.toFixed(2)}</span>
+                <span>₱{shipping.toFixed(2)}</span>
               </div>
               <Separator />
               <div className="flex justify-between font-medium">
                 <span>Total</span>
-                <span>${total.toFixed(2)}</span>
+                <span>₱{total.toFixed(2)}</span>
               </div>
             </CardContent>
             <CardFooter>

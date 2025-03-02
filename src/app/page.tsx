@@ -7,25 +7,25 @@ export default function Home() {
     {
       id: 1,
       name: "",
-      image: "/placeholder.svg?height=400&width=400",
+      image: "/cas.jpg?height=400&width=400",
       price: 0,
     },
     {
       id: 2,
       name: "",
-      image: "/placeholder.svg?height=400&width=400",
+      image: "/css.jpg?height=400&width=400",
       price: 0,
     },
     {
       id: 3,
       name: "",
-      image: "/placeholder.svg?height=400&width=400",
+      image: "/coTe.jpg?height=400&width=400",
       price: 0,
     },
     {
       id: 4,
       name: "",
-      image: "/placeholder.svg?height=400&width=400",
+      image: "/coca.jpg?height=400&width=400",
       price: 0,
     },
   ]

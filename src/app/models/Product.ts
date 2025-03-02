@@ -1,31 +1,10 @@
 import { executeQuery } from "app/lib/db"
-
-export interface Product {
-  id: number
-  name: string
-  slug: string
-  description: string
-  price: number
-  category_id: number
-  featured: boolean
-  active: boolean
-  created_at: Date
-  updated_at: Date
-  images?: string[]
-  sizes?: ProductSize[]
-}
-
-export interface ProductSize {
-  size: string
-  stock: number
-}
+import { parseDatabaseResponse, parseDatabaseResponseArray, parseProduct } from "app/lib/db/utils"
+import type { Product } from "./types"
 
 export class ProductModel {
-  static update(arg0: number, data: any) {
-    throw new Error("Method not implemented.")
-  }
   static async findAll(): Promise<Product[]> {
-    const products = await executeQuery<Product[]>({
+    const products = await executeQuery<any[]>({
       query: `
         SELECT p.*, 
           GROUP_CONCAT(DISTINCT pi.image_url) as images,
@@ -38,11 +17,11 @@ export class ProductModel {
       `,
     })
 
-    return products.map(this.formatProduct)
+    return parseDatabaseResponseArray(products, parseProduct)
   }
 
-  static async findById(id: number): Promise<Product | null> {
-    const products = await executeQuery<Product[]>({
+  static async findById(id: number): Promise<Product> {
+    const [product] = await executeQuery<any[]>({
       query: `
         SELECT p.*, 
           GROUP_CONCAT(DISTINCT pi.image_url) as images,
@@ -53,24 +32,16 @@ export class ProductModel {
         WHERE p.id = ?
         GROUP BY p.id
       `,
-      value: [id],
+      values: [id],
     })
 
-    return products[0] ? this.formatProduct(products[0]) : null
+    if (!product) {
+      throw new Error("Product not found")
+    }
+
+    return parseDatabaseResponse(product, parseProduct)
   }
 
-  private static formatProduct(product: any): Product {
-    return {
-      ...product,
-      images: product.images ? product.images.split(",") : [],
-      sizes: product.sizes
-        ? product.sizes.split(",").map((size: string) => {
-            const [name, stock] = size.split(":")
-            return { size: name, stock: Number.parseInt(stock) }
-          })
-        : [],
-    }
-  }
+  // Update other methods similarly...
 }
 
-export default Product
