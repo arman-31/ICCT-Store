@@ -21,7 +21,7 @@ export default function ShopPage() {
         id: 3,
         name: "College of Business & Accountancy",
         image: "/cba.jpg",
-        price: 14.99,
+        price: 1000,
         stock: 75,
       },
       {
@@ -46,7 +46,7 @@ export default function ShopPage() {
                 <div className="flex flex-col gap-2">
                   <h2 className="font-semibold">{product.name}</h2>
                   <div className="flex justify-between items-center">
-                    <p className="text-lg font-medium">${product.price.toFixed(2)}</p>
+                    <p className="text-lg font-medium">₱{product.price.toFixed(2)}</p>
                     <p className="text-sm text-muted-foreground">Stock: {product.stock}</p>
                   </div>
                 </div>
