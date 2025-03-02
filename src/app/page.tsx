@@ -8,25 +8,25 @@ export default function Home() {
       id: 1,
       name: "",
       image: "/cas.jpg?height=400&width=400",
-      price: 0,
+      price: 1000,
     },
     {
       id: 2,
       name: "",
-      image: "/css.jpg?height=400&width=400",
-      price: 0,
+      image: "/ccs.jpg?height=400&width=400",
+      price: 1000,
     },
     {
       id: 3,
       name: "",
       image: "/coTe.jpg?height=400&width=400",
-      price: 0,
+      price: 1000,
     },
     {
       id: 4,
       name: "",
       image: "/coca.jpg?height=400&width=400",
-      price: 0,
+      price: 1000,
     },
   ]
 
@@ -37,7 +37,7 @@ export default function Home() {
           <div key={product.id} className="flex flex-col gap-4">
             <div className="aspect-square relative overflow-hidden rounded-lg border bg-muted">
               <Image
-                src={product.image || "/placeholder.svg"}
+                src={product.image || "/.jpg"}
                 alt={product.name}
                 fill
                 className="object-cover transition-transform hover:scale-105"
@@ -45,7 +45,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col gap-1">
               <h3 className="font-medium">{product.name}</h3>
-              <p className="text-sm text-muted-foreground">${product.price.toFixed(2)}</p>
+              <p className="text-sm text-muted-foreground">₱{product.price.toFixed(2)}</p>
             </div>
           </div>
         ))}

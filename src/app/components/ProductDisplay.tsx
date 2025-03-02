@@ -3,10 +3,10 @@ import Link from "next/link"
 import { Button } from "app/components/ui/button"
 
 const products = [
-    { id: 1, name:"", image: "/placeholder.svg?height=300& width =300"},
-    { id: 2, name:"", image: "/placeholder.svg?height=300& width =300"},
-    { id: 3, name:"", image: "/placeholder.svg?height=300& width =300"},
-    { id: 4, name:"", image: "/placeholder.svg?height=300& width =300"},
+    { id: 1, name:"", image: "/cas.jpg?height=300& width =300"},
+    { id: 2, name:"", image: "/ishrm.jpg?height=300& width =300"},
+    { id: 3, name:"", image: "/coca.jpg?height=300& width =300"},
+    { id: 4, name:"", image: "/coe.jpg?height=300& width =300"},
 ]
 
 export default function ProductDisplay() {

@@ -3,6 +3,13 @@ import { parseDatabaseResponse, parseDatabaseResponseArray, parseProduct } from 
 import type { Product } from "./types"
 
 export class ProductModel {
+  static addSize(id: any, arg1: { size: string; stock: number }) {
+    throw new Error("Method not implemented.")
+  }
+  static addImage(id: any, imageUrl: string) {
+    throw new Error("Method not implemented.")
+  }
+  static create: any
   static async findAll(): Promise<Product[]> {
     const products = await executeQuery<any[]>({
       query: `
