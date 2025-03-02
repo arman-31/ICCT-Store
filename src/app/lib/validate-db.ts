@@ -1,4 +1,4 @@
-import  pool  from "app/lib/db"
+import  {pool}  from "app/lib/db"
 
 export async function validateDBConnection() {
   try {

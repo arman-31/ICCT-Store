@@ -12,18 +12,18 @@ export default function AdminDashboard() {
       id: "ORD001",
       student: "John Doe",
       studentId: "STU123",
-      product: "School Hoodie",
+      product: "College of Computer Studies",
       quantity: 1,
-      total: 39.99,
+      total: 1000,
       status: "Pending",
     },
     {
       id: "ORD002",
       student: "Jane Smith",
       studentId: "STU124",
-      product: "School T-Shirt",
+      product: "College of Art 7 Science",
       quantity: 2,
-      total: 39.98,
+      total: 2000,
       status: "Completed",
     },
   ])
@@ -99,7 +99,7 @@ export default function AdminDashboard() {
                       <br />
                       <span className="text-sm text-muted-foreground">Qty: {order.quantity}</span>
                     </TableCell>
-                    <TableCell>${order.total.toFixed(2)}</TableCell>
+                    <TableCell>₱{order.total.toFixed(2)}</TableCell>
                     <TableCell>{order.status}</TableCell>
                     <TableCell className="text-right">
                       <Button variants="outline" size="sm">
